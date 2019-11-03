@@ -18,7 +18,7 @@ The following four lines all calculate the same thing:
 1 2 3 4 ⊂ × + ⟦ - ⊃ ⟧ ⍎                 / Do the × +, push an execution token for the -, execute it /
 
 /
-The continuation works even if the [[ is further down
+The continuation works even if the ⟦ is further down
 the return stack, e.g.
 /
 
@@ -43,7 +43,7 @@ manipulated with combinators. For example to execute it twice we can use ↑ cat
 /
 Below are some examples illustrating how to execute Forth words by pushing their
 corresponding return addresses to the return stack. They're probably unnecessary
-but they are the experiments I did before writing [[ and ]] so I have left them
+but they are the experiments I did before writing ⟦ and ⟧ so I have left them
 in in case they help anyone else.
 /
 
