@@ -122,7 +122,7 @@
 
 ∇ .D 13 ∇ ∇ .R 14 ∇ ∇ .I 15 ∇ ∇ .J 16 ∇ / Register numbers for D,R,I,J pointers /
 
-∇ NEXT .J .I 8 ldr post ,, 0 .J 0 ldr ,, D61F0000 ,, ALIGN ∇ / Code for NEXT (hex opcode is for the branch b 0) /
+∇ NEXT .J .I 8 ldr post ,, 0 .J 0 ldr ,, D61F0000 ,, ALIGN ∇ / Code for NEXT (hex opcode is for the branch br x0) /
 
 / Example defining 7+ with the assembler /
 ∆ 7+ 0 .D pop ,, 0 0 7 addi ,, 0 .D push ,, NEXT
