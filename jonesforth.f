@@ -59,6 +59,7 @@
 ∇ CLEAR D0 D! ∇                         / Clear stack /
 
 / Strings /
+∇ H" H ( KEY ↑ '"' ≠ ∥ ⊤ C! 1+ ) ↓ 0 ⊤ ! H - H ↕ ∇                       / Store a string Here /
 ∇ S" I ' LITS , H 0 , ( KEY ↑ '"' ≠ ∥ C, ) ↓ ↑ H ↕ - 8- ↕ ! 0 C, ALIGN ∇ / Compile a string in a word /
 ∇ ." I S { [COMP] S" ' TELL , | ( KEY ↑ '"' ≠ ∥ EMIT ) ↓ } ∇             / Print a string /
 
@@ -182,7 +183,7 @@ SS0 SS !                                                        / Initialize SS 
 
 ∇ ⍇ 3F 3 SYS ∇          / read  /
 ∇ ⍈ 40 3 SYS ∇          / write /
-∇ ⍐ 64 ¯ 38 4 SYS ∇     / open  /
+∇ ⍐ 64 ¯ 38 3 SYS ∇     / open  /
 ∇ ⍗ 39 1 SYS ∇          / close /
 
 ∇ UNAME A0 1 SYS ∇
