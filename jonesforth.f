@@ -36,6 +36,9 @@
 : ∥) I ' BNZ , H - , ;                  / ( A ∥) does A until false /
 : 1∥) I ' BR , H - , ;                  / ( A 1∥) does A indefinitely /
 
+: (( I ' n! , [COMP] ( ;                / n (( A )) does A n times /
+: )) I ' n- , ' n , [COMP] ∥) ;
+
 : ∇ I S { [COMP] ; | : } ;              / ∇ starts and ends definitions /
 
 ∇ . ↑ 0≥ { U. | NEG U. '-' EMIT } ∇     / n→ Print signed number /
