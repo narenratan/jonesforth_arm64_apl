@@ -26,6 +26,8 @@
 #define E x17			// End pointer
 #define OUTB x11		// Output buffer pointer
 
+#define n x10           // Count register
+
 // Stack macros
 .macro push s,x; str \x,[\s,-8]!; .endm		// e.g. push D,x0 pushes x0 to data stack
 .macro push2 s,x,y; stp \y,\x,[\s,-16]!; .endm	// One instruction, two pushes!
@@ -108,6 +110,10 @@ def "S"; push D,S; NEXT; 						def "S!"; pop D,S; NEXT
 def "D0"; push D,D0; NEXT
 def "R0"; push D,R0; NEXT
 def DOCOL; push D,PDOC; NEXT
+
+def "n"; push D,n; NEXT; 						def "n!"; pop D,n; NEXT
+def "n+"; add n,n,1; NEXT; 						def "n-"; sub n,n,1; NEXT
+def "n0"; mov n,0; NEXT
 
 def KEY; bl key; push D,x0; NEXT;
 
@@ -238,6 +244,7 @@ _start:	mov D,sp					// Initialize Data stack pointer
 	adr B,b; mov K,B; mov E,B			// Initialize Buffer, Key, End pointers
 	adr OUTB,outb					// Initialize output buffer pointer
 	mov D0,D; mov R0,R				// Initialize stack top pointers
+	mov n,0;                                        // Initialize count register
 	adr PLIT,LIT; adr PDOC,docol			// Initialize LIT and DOCOL pointers
 	movi VC0A.16b,10; movi VC0F.16b,0x0F		// Initialize constant vector registers
 	movi VC20.16b,32; movi VC30.16b,'0'
