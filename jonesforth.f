@@ -85,7 +85,7 @@
 ∇ 1DUMP ↑ U. SPACE @ 40⌽ U. ∇ / a→ /
 ∇ DUMP ( ↑ ∥ ↕ ↑ 1DUMP CR 8+ ↕ 1- ) 2↓ ∇ / an→ /
 
-∇ INDATA? [ find EXIT ] LITERAL [ find MOD 4000 + ] LITERAL WITHIN ∇                    / a→n Check if address is in data area /
+∇ INDATA? [ find EXIT ] LITERAL [ find MOD 40000 + ] LITERAL WITHIN ∇                   / a→n Check if address is in data area /
 ∇ CEXIT [ find EXIT >CFA ] LITERAL ∇                                                    / →a  Codeword address of EXIT /
 ∇ SEE find >DFA ( ↑ @ CEXIT ≠ ∥ ↑ ↑ 1DUMP SPACE @ ↑ INDATA? { 8- ID. | . } CR 8+ ) ↓ ∇  / Decompile a word (try printing names of words, print literals) /
 

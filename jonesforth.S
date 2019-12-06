@@ -87,6 +87,7 @@ def 40⌽; pop D,x0; rev x0,x0; push D,x0; NEXT;				def 20⌽; pop D,x0; rev32 x
 def 10⌽; pop D,x0; rev16 x0,x0; push D,x0; NEXT;			def 1⌽; pop D,x0; rbit x0,x0; push D,x0; NEXT
 def >>;	pop2 D,x0,x1; lsr x0,x1,x0; push D,x0; NEXT;			def <<;	pop2 D,x0,x1; lsl x0,x1,x0; push D,x0; NEXT
 def ⌽>;	pop2 D,x0,x1; ror x0,x1,x0; push D,x0; NEXT
+def CLZ; pop D,x0; clz x0,x0; push D,x0; NEXT
 
 // Memory
 def !; pop2 D,x0,x1; str x1,[x0]; NEXT;					def @; pop D,x0; ldr x0,[x0]; push D,x0; NEXT
@@ -254,4 +255,4 @@ _start:	mov D,sp					// Initialize Data stack pointer
 	.data
 first:	.xword QUIT
 	.bss
-	.align 3; Dstart: .space 16384; Rtop:		// Space for data area (pointed to by H) and return stack
+	.align 3; Dstart: .space 262144; Rtop:		// Space for data area (pointed to by H) and return stack
