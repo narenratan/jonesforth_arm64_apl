@@ -26,7 +26,8 @@
 #define E x17			// End pointer
 #define OUTB x11		// Output buffer pointer
 
-#define n x10           // Count register
+#define n x9            // Count register
+#define m x10           // Count register
 
 // Stack macros
 .macro push s,x; str \x,[\s,-8]!; .endm		// e.g. push D,x0 pushes x0 to data stack
@@ -115,6 +116,10 @@ def DOCOL; push D,PDOC; NEXT
 def "n"; push D,n; NEXT; 						def "n!"; pop D,n; NEXT
 def "n+"; add n,n,1; NEXT; 						def "n-"; sub n,n,1; NEXT
 def "n0"; mov n,0; NEXT
+
+def "m"; push D,m; NEXT; 						def "m!"; pop D,m; NEXT
+def "m+"; add m,m,1; NEXT; 						def "m-"; sub m,m,1; NEXT
+def "m0"; mov m,0; NEXT
 
 def KEY; bl key; push D,x0; NEXT;
 
