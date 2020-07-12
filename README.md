@@ -3,9 +3,9 @@
 This is an ARMv8 AArch64 version of Richard W.M. Jones' original x86 JonesForth.
 I have added a few things including:
 
-    - Defining words
-    - Combinators
-    - Delimited continuations
+- Defining words
+- Combinators
+- Delimited continuations
 
 Also I have used the APL character set.
 
