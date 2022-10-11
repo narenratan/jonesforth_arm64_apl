@@ -71,7 +71,7 @@ def ×; pop2 D,x0,x1; mul x0,x1,x0; push D,x0; NEXT;			def ÷; pop2 D,x0,x1; sdi
 def ⌈; pop2 D,x0,x1; cmp x1,x0; csel x0,x1,x0,gt; push D,x0; NEXT;	def ⌊; pop2 D,x0,x1; cmp x1,x0; csel x0,x1,x0,lt; push D,x0; NEXT
 def 1+; pop D,x0; add x0,x0,1; push D,x0; NEXT;				def 1-; pop D,x0; sub x0,x0,1; push D,x0; NEXT
 def 8+; pop D,x0; add x0,x0,8; push D,x0; NEXT;				def 8-; pop D,x0; sub x0,x0,8; push D,x0; NEXT
-def ÷MOD; pop2 D x0,x1; sdiv x2,x1,x0; msub x1,x0,x2,x1; push2 D,x1,x2; NEXT
+def ÷MOD; pop2 D, x0,x1; sdiv x2,x1,x0; msub x1,x0,x2,x1; push2 D,x1,x2; NEXT
 
 // Logic
 def "="; pop2 D,x0,x1; cmp x1,x0; cset x0,eq; push D,x0; NEXT;		def ≠; pop2 D,x0,x1; cmp x1,x0; cset x0,ne; push D,x0; NEXT
