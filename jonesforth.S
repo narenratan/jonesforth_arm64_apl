@@ -196,7 +196,7 @@ def ALIGN; add H,H,7; and H,H,~7; NEXT		// Round H up to next word boundary
 def CREATE; stp L,W,[H],16; sub L,H,16; NEXT	// Store link pointer and name Here, updating Here and Latest
 
 def ","; pop D,x0; str x0,[H],8; NEXT		// Store word at H
-def ",,"; pop D,x0; str w0,[H],4; NEXT		// Store half word at H
+def ",,"; pop D,x0; str w0,[H],4; sub x0,H,4; dc cvau,x0; dsb ish; ic ivau,x0; dsb ish; isb; NEXT	// Store half-word at H (sync I-cache)
 def "C,"; pop D,x0; strb w0,[H],1; NEXT		// Store byte at H
 
 def "[\x0\x0\x0\x0\x0\x0\x80"; mov S,0; NEXT 	// [ starts compiling (defined with immediate flag)
