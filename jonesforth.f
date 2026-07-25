@@ -153,12 +153,12 @@
 
 / Exceptions /
 / Data stack restored after exception using a stack of stacks - see exceptions.f /
-VAR SS                                                          / Stack-stack pointer /
-D0 10 CELLS - CONST SS0                                         / Initial stack-stack pointer /
-SS0 SS !                                                        / Initialize SS /
-∇ SPUSH 10 CELLS SS -! DEPTH SS0 ! SS @ SS0 10 MOVE ∇           / Push current stack to stack-stack /
-∇ SPOP D0 SS0 @ CELLS - D! SS0 SS @ 10 MOVE 10 CELLS SS +! ∇    / Pop stack from stack-stack /
-∇ S↓ 10 CELLS SS +! ∇                                           / Drop top stack-stack stack /
+VAR SS                                                                  / Stack-stack pointer /
+200 CELLS ALLOT                                                         / Space for saved stacks /
+H SS !                                                                  / Initialize SS to end of storage (grows down) /
+∇ SPUSH DEPTH n! D m! n 1+ CELLS SS -! n SS @ ! SS @ 8+ m n MOVE ∇      / Push current stack to stack-stack /
+∇ SPOP SS @ @ n! D0 n CELLS - D! D SS @ 8+ n MOVE n 1+ CELLS SS +! ∇    / Pop stack from stack-stack /
+∇ S↓ SS @ @ 1+ CELLS SS +! ∇                                            / Drop top stack-stack stack /
 
 ∇ MARKER S↓ ∇
 ∇ CATCH ' MARKER 8+ >R SPUSH ⍎ ∇
