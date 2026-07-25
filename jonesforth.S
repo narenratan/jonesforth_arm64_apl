@@ -243,10 +243,12 @@ def SYS	// n SYS performs syscall with n arguments
 	.text
 	.globl _start
 _start:	mov D,sp					// Initialize Data stack pointer
-	adr R,Rtop;					// Initialize Return stack pointer
+	mov x0,0; mov x1,262144; mov x2,7		// mmap RWX memory for data area and return stack
+	mov x3,0x22; mov x4,-1; mov x5,0; mov x8,222; svc 0
+	mov H,x0; add R,x0,262144			// H at start of region, return stack at end
 	adr I,first					// Initialize Instruction pointer
 	mov S,0						// Initialize State
-	adr H,Dstart; adr L,lSYS			// Initialize Here and Latest pointers
+	adr L,lSYS                  			// Initialize Latest pointer
 	adr B,b; mov K,B; mov E,B			// Initialize Buffer, Key, End pointers
 	adr OUTB,outb					// Initialize output buffer pointer
 	mov D0,D; mov R0,R				// Initialize stack top pointers
@@ -259,5 +261,3 @@ _start:	mov D,sp					// Initialize Data stack pointer
 
 	.data
 first:	.xword QUIT
-	.bss
-	.align 3; Dstart: .space 262144; Rtop:		// Space for data area (pointed to by H) and return stack
