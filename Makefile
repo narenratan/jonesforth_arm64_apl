@@ -1,27 +1,24 @@
-SHELL := /bin/bash
-
 OUT := jonesforth
 SRC := jonesforth.S
-UNAME_M := $(shell uname -m)
+BUILD_FLAGS := -nostdlib -w
 
-ifeq ($(UNAME_M),aarch64)
+ifeq ($(shell uname -m),aarch64)
 DEFAULT_CC := gcc
-DEFAULT_BUILD_FLAGS := -nostdlib
 else ifneq ($(shell command -v aarch64-linux-gnu-gcc 2>/dev/null),)
 DEFAULT_CC := aarch64-linux-gnu-gcc
-DEFAULT_BUILD_FLAGS := -nostdlib -static
+BUILD_FLAGS += -static
 else
-$(error No suitable compiler found. Install gcc on aarch64, or aarch64-linux-gnu-gcc for cross-compiling)
+DEFAULT_CC := none
 endif
 
 ifeq ($(origin CC), default)
 CC := $(DEFAULT_CC)
 endif
-BUILD_FLAGS ?= $(DEFAULT_BUILD_FLAGS)
 
 all: $(OUT)
 
 $(OUT): $(SRC)
+	@if [ "$(CC)" = "none" ]; then echo "No suitable compiler found. Install gcc on aarch64, or aarch64-linux-gnu-gcc for cross-compiling"; exit 1; fi
 	$(CC) $(BUILD_FLAGS) -o $@ $<
 
 info:
@@ -38,7 +35,13 @@ info:
 run: $(OUT)
 	cat jonesforth.f - | ./$(OUT)
 
+test: $(OUT)
+	cat jonesforth.f tests.f | ./$(OUT)
+
+test-docker:
+	docker run --rm -v $(PWD):/app dev sh -c 'make test'
+
 clean:
 	rm -f $(OUT)
 
-.PHONY: all info run clean
+.PHONY: all info run test test-docker clean

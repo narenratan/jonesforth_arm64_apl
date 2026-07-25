@@ -41,3 +41,21 @@ You may need to
 
 if your terminal isn't set up to handle utf8 by default.
 
+You can run some tests with
+
+    cat jonesforth.f tests.f | ./a.out
+
+or run `make test`.
+
+For running on ARM Macs, `make test-docker` will run the tests in a Ubuntu
+Docker container. To run the interpreter interactively on Mac, you can run
+
+    docker build -t dev .
+
+and then
+
+    docker run -it --rm -v $(pwd):/app dev
+    gcc -nostdlib jonesforth.S
+    cat jonesforth.f - | ./a.out
+
+*Naren Ratan*
